@@ -4,8 +4,8 @@
  */
 
 const bcrypt = require('bcrypt');
-const { db, initDatabase } = require('./_utils/database');
-const { generateToken, json, error, setCors } = require('./_utils/auth');
+const { db, initDatabase } = require('../_utils/database');
+const { generateToken, json, error, setCors } = require('../_utils/auth');
 
 module.exports = async function handler(req, res) {
     setCors(res);
