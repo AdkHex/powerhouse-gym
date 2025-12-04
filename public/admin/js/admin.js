@@ -1107,7 +1107,8 @@ async function loadMessages() {
         `).join('') || '<tr><td colspan="6" class="empty-state">No messages</td></tr>';
         
     } catch (error) {
-        showToast('Failed to load messages', 'error');
+        console.error('Load messages error:', error);
+        showToast(`Failed to load messages: ${error.message}`, 'error');
     }
 }
 
