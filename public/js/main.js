@@ -441,28 +441,61 @@ async function loadSettings() {
  * Apply loaded settings to the page
  */
 function applySettings() {
-    // Apply custom colors if set
-    if (App.settings.primary_color) {
-        document.documentElement.style.setProperty('--color-primary', App.settings.primary_color);
-    }
-    if (App.settings.secondary_color) {
-        document.documentElement.style.setProperty('--color-dark', App.settings.secondary_color);
-    }
-    if (App.settings.accent_color) {
-        document.documentElement.style.setProperty('--color-accent', App.settings.accent_color);
+    const s = App.settings;
+
+    // 1. Site Identity
+    if (s.site_title) {
+        document.title = s.site_title + (s.site_tagline ? ` | ${s.site_tagline}` : '');
+        // Update logo text if needed, though usually static
     }
 
-    // Update hero content if available
+    // 2. Theme Colors
+    if (s.primary_color) document.documentElement.style.setProperty('--color-primary', s.primary_color);
+    if (s.secondary_color) document.documentElement.style.setProperty('--color-dark', s.secondary_color);
+    if (s.accent_color) document.documentElement.style.setProperty('--color-accent', s.accent_color);
+
+    // 3. Hero Section
     const heroTitle = document.querySelector('.hero-title');
     const heroSubtitle = document.querySelector('.hero-subtitle');
-    
-    if (heroTitle && App.settings.hero_title) {
-        const parts = App.settings.hero_title.split('\n');
+    const heroCta = document.querySelector('.hero-buttons .btn-primary');
+
+    if (heroTitle && s.hero_title) {
+        // Preserving the span if it exists in the input, or just simple text
+        // If the user input has newlines, we can try to split it like before
+        const parts = s.hero_title.split('\n');
         heroTitle.innerHTML = parts[0] + (parts[1] ? `<span>${parts[1]}</span>` : '');
     }
-    if (heroSubtitle && App.settings.hero_subtitle) {
-        heroSubtitle.textContent = App.settings.hero_subtitle;
+    if (heroSubtitle && s.hero_subtitle) heroSubtitle.textContent = s.hero_subtitle;
+    if (heroCta && s.hero_cta_text) heroCta.textContent = s.hero_cta_text;
+
+    // 4. Contact Info (Footer)
+    // Selectors based on index in .footer-contact-item
+    const contactItems = document.querySelectorAll('.footer-contact-item span');
+    if (contactItems.length >= 4) {
+        if (s.contact_address) contactItems[0].textContent = s.contact_address;
+        if (s.contact_phone) contactItems[1].textContent = s.contact_phone;
+        if (s.contact_email) contactItems[2].textContent = s.contact_email;
+        if (s.opening_hours) contactItems[3].innerHTML = s.opening_hours.replace(/\n/g, '<br>');
     }
+
+    // 5. Social Links
+    const socialLinks = {
+        'Facebook': s.social_facebook,
+        'Instagram': s.social_instagram,
+        'YouTube': s.social_youtube
+    };
+
+    Object.entries(socialLinks).forEach(([platform, url]) => {
+        const link = document.querySelector(`.footer-social a[aria-label="${platform}"]`);
+        if (link) {
+            if (url) {
+                link.href = url;
+                link.style.display = 'inline-flex';
+            } else {
+                link.style.display = 'none';
+            }
+        }
+    });
 }
 
 /**

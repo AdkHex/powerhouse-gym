@@ -280,8 +280,8 @@ async function loadPages() {
                 <td>${getStatusBadge(page.is_published ? 'published' : 'draft')}</td>
                 <td>${formatDate(page.updated_at)}</td>
                 <td class="table-actions">
-                    <button onclick="editPage(${page.id})">Edit</button>
-                    <button class="delete" onclick="deletePage(${page.id})">Delete</button>
+                    <button class="action-btn-edit" data-id="${page.id}">Edit</button>
+                    <button class="delete action-btn-delete" data-id="${page.id}">Delete</button>
                 </td>
             </tr>
         `).join('') || '<tr><td colspan="5" class="empty-state">No pages found</td></tr>';
@@ -300,6 +300,18 @@ document.getElementById('addPageBtn')?.addEventListener('click', () => {
         showToast('Page created successfully');
         loadPages();
     });
+});
+
+// Event Delegation for Pages
+document.querySelector('#pagesTable tbody').addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.action-btn-edit');
+    const deleteBtn = e.target.closest('.action-btn-delete');
+
+    if (editBtn) {
+        editPage(editBtn.dataset.id);
+    } else if (deleteBtn) {
+        deletePage(deleteBtn.dataset.id);
+    }
 });
 
 async function editPage(id) {
@@ -366,8 +378,8 @@ async function loadBlog() {
                 <td>${getStatusBadge(post.status)}</td>
                 <td>${formatDate(post.publish_date || post.created_at)}</td>
                 <td class="table-actions">
-                    <button onclick="editPost(${post.id})">Edit</button>
-                    <button class="delete" onclick="deletePost(${post.id})">Delete</button>
+                    <button class="action-btn-edit" data-id="${post.id}">Edit</button>
+                    <button class="delete action-btn-delete" data-id="${post.id}">Delete</button>
                 </td>
             </tr>
         `).join('') || '<tr><td colspan="5" class="empty-state">No posts found</td></tr>';
@@ -385,6 +397,18 @@ document.getElementById('addPostBtn')?.addEventListener('click', () => {
         showToast('Post created successfully');
         loadBlog();
     });
+});
+
+// Event Delegation for Blog
+document.querySelector('#blogTable tbody').addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.action-btn-edit');
+    const deleteBtn = e.target.closest('.action-btn-delete');
+
+    if (editBtn) {
+        editPost(editBtn.dataset.id);
+    } else if (deleteBtn) {
+        deletePost(deleteBtn.dataset.id);
+    }
 });
 
 async function editPost(id) {
@@ -449,10 +473,10 @@ async function loadMedia() {
         const grid = document.getElementById('mediaGrid');
         
         grid.innerHTML = media.map(item => `
-            <div class="media-item" onclick="showMediaDetails(${item.id})">
+            <div class="media-item" data-id="${item.id}">
                 <img src="${item.file_path}" alt="${item.alt_text || item.original_name}">
                 <div class="media-item-overlay">
-                    <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); deleteMedia(${item.id})">Delete</button>
+                    <button class="btn btn-sm btn-danger action-btn-delete" data-id="${item.id}">Delete</button>
                 </div>
             </div>
         `).join('') || '<p class="empty-state">No media files. Upload some!</p>';
@@ -485,6 +509,19 @@ mediaFileInput?.addEventListener('change', async (e) => {
     mediaFileInput.value = '';
 });
 
+// Event Delegation for Media
+document.getElementById('mediaGrid').addEventListener('click', (e) => {
+    const deleteBtn = e.target.closest('.action-btn-delete');
+    const mediaItem = e.target.closest('.media-item');
+
+    if (deleteBtn) {
+        e.stopPropagation();
+        deleteMedia(deleteBtn.dataset.id);
+    } else if (mediaItem) {
+        // showMediaDetails(mediaItem.dataset.id); // Assuming this function exists or will be implemented
+    }
+});
+
 async function deleteMedia(id) {
     if (confirm('Delete this file?')) {
         await api(`/media/${id}`, { method: 'DELETE' });
@@ -514,8 +551,8 @@ async function loadTrainers() {
                 </div>
                 <p style="color: var(--color-gray-400); font-size: 13px; margin-bottom: 16px;">${t.bio || 'No bio available'}</p>
                 <div style="display: flex; gap: 8px;">
-                    <button class="btn btn-sm btn-secondary" onclick="editTrainer(${t.id})">Edit</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteTrainer(${t.id})">Delete</button>
+                    <button class="btn btn-sm btn-secondary action-btn-edit" data-id="${t.id}">Edit</button>
+                    <button class="btn btn-sm btn-danger action-btn-delete" data-id="${t.id}">Delete</button>
                 </div>
             </div>
         `).join('') || '<p class="empty-state">No trainers added yet</p>';
@@ -534,6 +571,18 @@ document.getElementById('addTrainerBtn')?.addEventListener('click', () => {
         showToast('Trainer added successfully');
         loadTrainers();
     });
+});
+
+// Event Delegation for Trainers
+document.getElementById('trainersGrid').addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.action-btn-edit');
+    const deleteBtn = e.target.closest('.action-btn-delete');
+
+    if (editBtn) {
+        editTrainer(editBtn.dataset.id);
+    } else if (deleteBtn) {
+        deleteTrainer(deleteBtn.dataset.id);
+    }
 });
 
 async function editTrainer(id) {
@@ -605,8 +654,8 @@ async function loadClasses() {
                 <td>NPR ${c.price || 0}</td>
                 <td>${getStatusBadge(c.is_active ? 'active' : 'inactive')}</td>
                 <td class="table-actions">
-                    <button onclick="editClass(${c.id})">Edit</button>
-                    <button class="delete" onclick="deleteClass(${c.id})">Delete</button>
+                    <button class="action-btn-edit" data-id="${c.id}">Edit</button>
+                    <button class="delete action-btn-delete" data-id="${c.id}">Delete</button>
                 </td>
             </tr>
         `).join('') || '<tr><td colspan="6" class="empty-state">No classes found</td></tr>';
@@ -626,6 +675,18 @@ document.getElementById('addClassBtn')?.addEventListener('click', async () => {
         showToast('Class added successfully');
         loadClasses();
     });
+});
+
+// Event Delegation for Classes
+document.querySelector('#classesTable tbody').addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.action-btn-edit');
+    const deleteBtn = e.target.closest('.action-btn-delete');
+
+    if (editBtn) {
+        editClass(editBtn.dataset.id);
+    } else if (deleteBtn) {
+        deleteClass(deleteBtn.dataset.id);
+    }
 });
 
 async function editClass(id) {
@@ -715,8 +776,8 @@ async function loadMembership() {
                     ${(p.features || []).map(f => `<li style="color: var(--color-gray-300); padding: 4px 0; font-size: 13px;">✓ ${f}</li>`).join('')}
                 </ul>
                 <div style="display: flex; gap: 8px;">
-                    <button class="btn btn-sm btn-secondary" onclick="editPlan(${p.id})">Edit</button>
-                    <button class="btn btn-sm btn-danger" onclick="deletePlan(${p.id})">Delete</button>
+                    <button class="btn btn-sm btn-secondary action-btn-edit" data-id="${p.id}">Edit</button>
+                    <button class="btn btn-sm btn-danger action-btn-delete" data-id="${p.id}">Delete</button>
                 </div>
             </div>
         `).join('') || '<p class="empty-state">No membership plans</p>';
@@ -751,6 +812,18 @@ document.getElementById('addPlanBtn')?.addEventListener('click', () => {
         showToast('Plan added successfully');
         loadMembership();
     });
+});
+
+// Event Delegation for Membership Plans
+document.getElementById('plansGrid').addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.action-btn-edit');
+    const deleteBtn = e.target.closest('.action-btn-delete');
+
+    if (editBtn) {
+        editPlan(editBtn.dataset.id);
+    } else if (deleteBtn) {
+        deletePlan(deleteBtn.dataset.id);
+    }
 });
 
 async function editPlan(id) {
@@ -836,8 +909,8 @@ async function loadTestimonials() {
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
                     ${getStatusBadge(t.is_approved ? 'active' : 'pending')}
                     <div style="display: flex; gap: 8px;">
-                        <button class="btn btn-sm btn-secondary" onclick="editTestimonial(${t.id})">Edit</button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteTestimonial(${t.id})">Delete</button>
+                        <button class="btn btn-sm btn-secondary action-btn-edit" data-id="${t.id}">Edit</button>
+                        <button class="btn btn-sm btn-danger action-btn-delete" data-id="${t.id}">Delete</button>
                     </div>
                 </div>
             </div>
@@ -857,6 +930,18 @@ document.getElementById('addTestimonialBtn')?.addEventListener('click', () => {
         showToast('Testimonial added');
         loadTestimonials();
     });
+});
+
+// Event Delegation for Testimonials
+document.getElementById('testimonialsGrid').addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.action-btn-edit');
+    const deleteBtn = e.target.closest('.action-btn-delete');
+
+    if (editBtn) {
+        editTestimonial(editBtn.dataset.id);
+    } else if (deleteBtn) {
+        deleteTestimonial(deleteBtn.dataset.id);
+    }
 });
 
 async function editTestimonial(id) {
@@ -928,8 +1013,8 @@ async function loadGallery() {
                 <h4 style="color: var(--color-white); margin-bottom: 4px;">${a.name}</h4>
                 <p style="color: var(--color-gray-500); font-size: 13px; margin-bottom: 12px;">${a.image_count || 0} images</p>
                 <div style="display: flex; gap: 8px;">
-                    <button class="btn btn-sm btn-secondary" onclick="editAlbum(${a.id})">Edit</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteAlbum(${a.id})">Delete</button>
+                    <button class="btn btn-sm btn-secondary action-btn-edit" data-id="${a.id}">Edit</button>
+                    <button class="btn btn-sm btn-danger action-btn-delete" data-id="${a.id}">Delete</button>
                 </div>
             </div>
         `).join('') || '<p class="empty-state">No albums yet</p>';
@@ -947,6 +1032,18 @@ document.getElementById('addAlbumBtn')?.addEventListener('click', () => {
         showToast('Album created');
         loadGallery();
     });
+});
+
+// Event Delegation for Gallery
+document.getElementById('albumsGrid').addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.action-btn-edit');
+    const deleteBtn = e.target.closest('.action-btn-delete');
+
+    if (editBtn) {
+        editAlbum(editBtn.dataset.id);
+    } else if (deleteBtn) {
+        deleteAlbum(deleteBtn.dataset.id);
+    }
 });
 
 async function editAlbum(id) {
@@ -1003,8 +1100,8 @@ async function loadMessages() {
                 <td>${formatDate(m.created_at)}</td>
                 <td>${getStatusBadge(m.is_read ? 'read' : 'unread')}</td>
                 <td class="table-actions">
-                    <button onclick="viewMessage(${m.id})">View</button>
-                    <button class="delete" onclick="deleteMessage(${m.id})">Delete</button>
+                    <button class="action-btn-view" data-id="${m.id}">View</button>
+                    <button class="delete action-btn-delete" data-id="${m.id}">Delete</button>
                 </td>
             </tr>
         `).join('') || '<tr><td colspan="6" class="empty-state">No messages</td></tr>';
@@ -1013,6 +1110,18 @@ async function loadMessages() {
         showToast('Failed to load messages', 'error');
     }
 }
+
+// Event Delegation for Messages
+document.querySelector('#messagesTable tbody').addEventListener('click', (e) => {
+    const viewBtn = e.target.closest('.action-btn-view');
+    const deleteBtn = e.target.closest('.action-btn-delete');
+
+    if (viewBtn) {
+        viewMessage(viewBtn.dataset.id);
+    } else if (deleteBtn) {
+        deleteMessage(deleteBtn.dataset.id);
+    }
+});
 
 async function viewMessage(id) {
     const msg = await api(`/contact/submissions/${id}`);
