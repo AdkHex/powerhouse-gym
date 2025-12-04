@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Database
+data/*.sqlite
+data/*.db
+
+# Uploads (keep structure, ignore files)
+uploads/*
+!uploads/.gitkeep
+
+# Build outputs
+*.min.css
+*.min.js
+public/js/bundle.min.js
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test coverage
+coverage/
+
+# Temp files
+tmp/
+temp/

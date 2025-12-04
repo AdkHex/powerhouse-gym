@@ -1,0 +1,291 @@
+/**
+ * PowerHouse Gym Chitwan - Responsive Styles
+ * Mobile-first responsive breakpoints
+ */
+
+/* ========================================
+   MOBILE FIRST (Base styles are mobile)
+   ======================================== */
+
+/* Extra small devices (phones, 320px and up) */
+@media screen and (max-width: 575px) {
+    :root {
+        --container-padding: var(--space-4);
+    }
+
+    .hero-title {
+        font-size: var(--text-4xl);
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: var(--space-6);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .section {
+        padding: var(--space-12) 0;
+    }
+
+    .section-title {
+        font-size: var(--text-3xl);
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-bottom-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pricing-card.featured {
+        transform: none;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .hero-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ========================================
+   TABLET (768px and up)
+   ======================================== */
+@media screen and (max-width: 991px) {
+    .navbar-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 350px;
+        height: 100vh;
+        background: var(--color-darker);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-6);
+        transition: right var(--transition-base);
+        z-index: var(--z-fixed);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar-nav.active {
+        right: 0;
+    }
+
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-cta {
+        margin-left: 0;
+        margin-top: var(--space-4);
+    }
+
+    .nav-link {
+        font-size: var(--text-xl);
+    }
+
+    /* Mobile nav overlay */
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--transition-base);
+        z-index: calc(var(--z-fixed) - 1);
+    }
+
+    .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .grid-cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-brand {
+        grid-column: span 2;
+    }
+}
+
+/* ========================================
+   DESKTOP (992px and up)
+   ======================================== */
+@media screen and (min-width: 992px) {
+    :root {
+        --container-padding: var(--space-6);
+    }
+
+    .navbar-toggle {
+        display: none;
+    }
+
+    .hero-content {
+        text-align: left;
+        max-width: 50%;
+        margin-left: var(--space-8);
+    }
+
+    .hero-buttons {
+        justify-content: flex-start;
+    }
+
+    .hero-stats {
+        justify-content: flex-start;
+    }
+}
+
+/* ========================================
+   LARGE DESKTOP (1200px and up)
+   ======================================== */
+@media screen and (min-width: 1200px) {
+    :root {
+        --container-padding: var(--space-8);
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ========================================
+   EXTRA LARGE DESKTOP (1400px and up)
+   ======================================== */
+@media screen and (min-width: 1400px) {
+    :root {
+        --container-max: 1400px;
+    }
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .fade-in,
+    .fade-in-left,
+    .fade-in-right,
+    .scale-in,
+    .stagger-item {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+    .navbar,
+    .hero-scroll,
+    .footer-social,
+    .btn {
+        display: none !important;
+    }
+
+    body {
+        color: #000;
+        background: #fff;
+    }
+
+    .section-dark,
+    .section-accent {
+        background: #fff;
+        color: #000;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+
+    .hero-overlay {
+        display: none;
+    }
+
+    .hero-title,
+    .section-title {
+        color: #000;
+    }
+}
+
+/* ========================================
+   DARK MODE SUPPORT (Optional)
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+    /* Already dark theme by default for gym aesthetic */
+}
+
+/* ========================================
+   HIGH CONTRAST MODE
+   ======================================== */
+@media (prefers-contrast: high) {
+    :root {
+        --color-primary: #ff0000;
+        --color-gray-400: #999;
+        --color-gray-500: #888;
+        --color-gray-600: #666;
+    }
+
+    .btn-primary {
+        border: 2px solid var(--color-white);
+    }
+
+    .card,
+    .feature-card,
+    .pricing-card,
+    .testimonial-card {
+        border: 2px solid var(--color-gray-500);
+    }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "powerhouse-gym-chitwan",
+  "version": "1.0.0",
+  "description": "Modern gym website for PowerHouse Gym Chitwan with admin dashboard",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "vercel-build": "echo 'Build complete'",
+    "test": "echo \"Tests will be added\" && exit 0"
+  },
+  "keywords": [
+    "gym",
+    "fitness",
+    "website",
+    "cms"
+  ],
+  "author": "PowerHouse Gym Chitwan",
+  "license": "MIT",
+  "dependencies": {
+    "@libsql/client": "^0.5.6",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
