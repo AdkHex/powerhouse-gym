@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | PowerHouse Gym Chitwan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <style>
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .gallery-item { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 12px; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        @media (max-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body class="dark-theme">
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-container">
+            <a href="/" class="navbar-logo"><span class="navbar-logo-text">Power<span>House</span></span></a>
+            <ul class="navbar-nav" id="navMenu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about.html" class="nav-link">About</a></li>
+                <li><a href="/classes.html" class="nav-link">Classes</a></li>
+                <li><a href="/trainers.html" class="nav-link">Trainers</a></li>
+                <li><a href="/gallery.html" class="nav-link active">Gallery</a></li>
+                <li><a href="/contact.html" class="nav-link">Contact</a></li>
+                <li class="navbar-cta"><a href="/membership.html" class="btn btn-primary">Join Now</a></li>
+            </ul>
+            <button class="navbar-toggle" id="navToggle"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <section class="hero" style="min-height: 40vh;">
+        <div class="hero-bg"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80" alt="Gallery"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Our <span>Gallery</span></h1>
+            <p class="hero-subtitle">Take a look at our world-class facilities</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Gym interior" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80" alt="Training session" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Weight training" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Cardio area" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" alt="Yoga class" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&q=80" alt="Equipment" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2024 PowerHouse Gym Chitwan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

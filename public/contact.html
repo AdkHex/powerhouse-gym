@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | PowerHouse Gym Chitwan</title>
+    <meta name="description" content="Get in touch with PowerHouse Gym Chitwan. Contact us for membership inquiries, class schedules, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-container">
+            <a href="/" class="navbar-logo">
+                <span class="navbar-logo-text">Power<span>House</span></span>
+            </a>
+            <ul class="navbar-nav" id="navMenu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about.html" class="nav-link">About</a></li>
+                <li><a href="/classes.html" class="nav-link">Classes</a></li>
+                <li><a href="/trainers.html" class="nav-link">Trainers</a></li>
+                <li><a href="/gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="/contact.html" class="nav-link active">Contact</a></li>
+                <li class="navbar-cta">
+                    <a href="/membership.html" class="btn btn-primary">Join Now</a>
+                </li>
+            </ul>
+            <button class="navbar-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 40vh;">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80" alt="Gym">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Contact <span>Us</span></h1>
+            <p class="hero-subtitle">We'd love to hear from you. Get in touch!</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 60px;">
+                <!-- Contact Form -->
+                <div>
+                    <h2 style="font-family: var(--font-heading); font-size: var(--text-3xl); margin-bottom: var(--space-6);">
+                        Send Us a <span style="color: var(--color-primary);">Message</span>
+                    </h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label">Your Name *</label>
+                            <input type="text" name="name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address *</label>
+                            <input type="email" name="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" name="phone" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Subject</label>
+                            <input type="text" name="subject" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Message *</label>
+                            <textarea name="message" class="form-input" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                    </form>
+                    <div id="formMessage" style="margin-top: 20px;"></div>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h2 style="font-family: var(--font-heading); font-size: var(--text-3xl); margin-bottom: var(--space-6);">
+                        Visit <span style="color: var(--color-primary);">Us</span>
+                    </h2>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: var(--color-primary); margin-bottom: 10px;">📍 Address</h3>
+                        <p style="color: var(--color-gray-400);">Narayangadh, Chitwan, Nepal</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: var(--color-primary); margin-bottom: 10px;">📞 Phone</h3>
+                        <p style="color: var(--color-gray-400);">+977-980-0000-000</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: var(--color-primary); margin-bottom: 10px;">✉️ Email</h3>
+                        <p style="color: var(--color-gray-400);">info@powerhousegym.com</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: var(--color-primary); margin-bottom: 10px;">🕐 Hours</h3>
+                        <p style="color: var(--color-gray-400);">
+                            Monday - Saturday: 5:00 AM - 10:00 PM<br>
+                            Sunday: 6:00 AM - 8:00 PM
+                        </p>
+                    </div>
+
+                    <!-- Map Placeholder -->
+                    <div style="background: var(--color-gray-800); border-radius: 12px; height: 250px; display: flex; align-items: center; justify-content: center;">
+                        <p style="color: var(--color-gray-500);">Map will be displayed here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2024 PowerHouse Gym Chitwan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const data = Object.fromEntries(new FormData(form));
+            
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (res.ok) {
+                    document.getElementById('formMessage').innerHTML = 
+                        '<p style="color: #4ade80; background: rgba(74,222,128,0.1); padding: 16px; border-radius: 8px;">Message sent successfully! We\'ll get back to you soon.</p>';
+                    form.reset();
+                } else {
+                    throw new Error('Failed');
+                }
+            } catch (err) {
+                document.getElementById('formMessage').innerHTML = 
+                    '<p style="color: #f87171; background: rgba(248,113,113,0.1); padding: 16px; border-radius: 8px;">Failed to send message. Please try again.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

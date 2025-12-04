@@ -1,26 +1,13 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/:path*" }
+  ],
+  "headers": [
     {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "admin/**",
-      "use": "@vercel/static"
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ]
     }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/admin/(.*)", "dest": "/admin/$1" },
-    { "src": "/admin", "dest": "/admin/index.html" },
-    { "src": "/(.*)", "dest": "/public/$1" }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
