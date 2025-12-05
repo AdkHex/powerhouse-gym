@@ -54,7 +54,9 @@ async function api(endpoint, options = {}) {
     const data = await response.json();
     
     if (!response.ok) {
-        throw new Error(data.error || 'Request failed');
+        console.error('API Error Data:', data);
+        const errorMessage = typeof data.error === 'object' ? JSON.stringify(data.error) : (data.error || 'Request failed');
+        throw new Error(errorMessage);
     }
     
     return data;
@@ -1116,7 +1118,15 @@ async function loadMessages() {
         
     } catch (error) {
         console.error('Load messages error:', error);
-        showToast(`Failed to load messages: ${error.message}`, 'error');
+        let errorMsg = error.message || 'Unknown error';
+        if (errorMsg === '[object Object]') {
+            try {
+                errorMsg = JSON.stringify(error);
+            } catch (e) {
+                errorMsg = 'Unserializable error object';
+            }
+        }
+        showToast(`Failed to load messages: ${errorMsg}`, 'error');
     }
 }
 
