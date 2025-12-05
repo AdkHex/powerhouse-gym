@@ -38,10 +38,18 @@ async function api(endpoint, options = {}) {
         ...options,
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
             'Authorization': `Bearer ${authToken}`,
             ...options.headers
         }
     });
+    
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('API Error (Non-JSON response):', text);
+        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    }
     
     const data = await response.json();
     
